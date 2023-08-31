@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="style.css"/>
     <style>
         img {
-            height: 100px;
+            height: 150px;
+            width: 300px;
         }
 
         /**
@@ -23,8 +24,8 @@
         */
         .headline_container{
             
-            border: 5px solid greenyellow;
-            background-color: brown;
+          /*  border: 5px solid greenyellow;
+           /* background-color: brown; */
             margin: 5px;
             justify-content: center;
             display: flex;
@@ -33,38 +34,99 @@
         }
 
         .choice_container{
-            border: 5px solid orange;
-            background-color:darkcyan;
+           /* border: 5px solid orange;
+            background-color:darkcyan; */
             margin: 5px;
             display: flex;
             justify-content: center;
-            height: 450px;
+            height: 300px;
             align-items: center;
+            justify-content:space-evenly;
         }
 
         .rock_div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+           /* border: 5px solid red; */
             
         }
 
-        .paper_div{
-
+        .rockimage{
+          /*  border: 10px solid blue; */
 
         }
+        .rock_text{
+           /* border: 5px solid brown; */
+            text-align: center;
+            font-family: Impact, fantasy;
+            font-size: 25px;
+
+        }
+
+        .paper_div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+           /* border: 5px solid red; */
+
+        }
+        .paperimage{
+           /* border: 10px solid blue; */
+
+        }
+
+        .paper_text{
+           /* border: 5px solid brown; */
+            text-align: center;
+            font-family: Impact, fantasy;
+            font-size: 25px;
+
+        }
+
 
         .sissors_div{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+           /* border: 5px solid red; */
 
         }
 
+        .sissorsimage{
+           /* border: 10px solid blue; */
 
 
+        }
 
+        .sissors_text{
+           /* border: 5px solid brown; */
+            text-align: center;
+            font-family: Impact, fantasy;
+            font-size: 25px;
 
+        }
 
 
         .scoreboard_container{
-            border: 5px solid pink;
-            background-color: blue;
+          /*  border: 5px solid pink;
+           /* background-color: blue; */
             margin: 5px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .choice_text{
+            font-size: 45px;
+            font-family: Luminari, fantasy;
+            letter-spacing: 5px;
+        }
+
+        .scoreboard_text{
+            font-size: 35px;
+            font-family: Luminari, fantasy;
+
         }
     
     
@@ -81,9 +143,8 @@
 <body>
     
     
-    <!-- the big box covering the webpage-->
+    
    
-        
         <!-- box containing the headline, "pick your weapon"-->
         <div class="headline_container">Choose your weapon wisely!</div>
         
@@ -91,173 +152,29 @@
         <div class="choice_container">
             <!-- the three choices-->
             <div class="rock_div"> 
-                <img src="rockpicture.jpeg" class="rockimage" alt="a picture of a rock named Dwayne.">
-                Rock!
+                <img src="rockiscooking.jpeg" class="rockimage" alt="a picture of a rock named Dwayne.">
+                <p class="rock_text">Rock!</p>
             </div>
             <div class="paper_div">
                 <img src="paperpicture.jpeg" class="paperimage" alt="a bill of currency with a intergalactic hero at the face.">
-                Paper!
+                <p class="paper_text">Paper!</p>
             </div>
             <div class="sissors_div">
-                <img src="sissorshands.jpeg" class="sissorsimage" alt="picture of sissors you can hold in your hand or use as a hand">
-                Sissors!
+                <img src="crabclawsissors.jpeg" class="sissorsimage" alt="picture of sissors you can hold in your hand or use as a hand">
+                <p class="sissors_text">Sissors!</p>
             </div>
         </div>
         
         <!-- box for the scoreboard, and display of who is winning-->
-        <div class="scoreboard_container">The score is:</div>
+        <div class="scoreboard_container">
+            <p class="choice_text">What's it going to be?</p>
+            <p class="scoreboard_text">The score is:</p>
 
 
-        <script>
+        </div>
 
-            function GetComputerChoice() {
-    
-                 max = 3;
-                 min = 1;
-    
-                let random_number = Math.floor(Math.random() * (max - min + 1) + min);
-    
-                if (random_number == 1) {
-                    console.log('Rock!');
-                    let result1 = 'Rock';
-                    let formatted_result1 = result1.toUppercase;
-                    let result_return1 = 1;
-                    return result_return1;
-                    
-    
-                } else if (random_number == 2) {
-                    console.log('Paper!');
-                    let result2 = 'Paper';
-                    let formatted_result2 = result2.toUppercase;
-                    let result_return2 = 2;
-                    return result_return2;
-    
-                } else {
-                    console.log('Sissors!');
-                    let result3 = 'Sissors';
-                    let formatted_result3 = result3.toUppercase;
-                    let result_return3 = 3;
-                    return result_return3;
-                }
-    
-            }
-    
-            function GetPlayerChoice () {
-    
-                let player_choice = prompt('Choose your weapon: Rock, Paper, or Sissors?');
-                let formatted_player_choice = player_choice.toLowerCase();
-               
-                if (formatted_player_choice === 'sissors') {
-                    let player_return3 = 3;
-                    console.log('You input sissors.');
-                    return player_return3;
-                } else if (formatted_player_choice === 'paper') {
-                    let player_return2 = 2;
-                    console.log('You input paper.');
-                    return player_return2;
-                } else if (formatted_player_choice === 'rock') {
-                    let player_return1 = 1;
-                    console.log('You input rock.');
-                    return player_return1;
-                } else {
-                    let odd_input = 'Computer wins by default.';
-                    console.log('You input something weird.');
-                    return odd_input;
-                }
-    
-            }
-    
-    
-    
-    
-    
-            
-    
-            function RockPaperSissorsRound (player, computer) {
-                if (player == 1 && computer == 2) {
-                    let playerrock_computerpaper = 'You lose! Paper beats rock.';
-                    console.log(playerrock_computerpaper);
-                    return playerrock_computerpaper;
-    
-                } else if (player == 2 && computer == 3) {
-                    let playerpaper_computersissors = 'You lose! Sissors beat paper.';
-                    console.log(playerpaper_computersissors);
-                    return playerpaper_computersissors;
-                
-                } else if (player == 3 && computer == 1) {
-                    let playersissors_computerrock = 'You lose! Rock beats sissors.';
-                    console.log(playersissors_computerrock);
-                    return playersissors_computerrock;
-    
-                } else if (player == 1 && computer == 3) {
-                    let playerrock_computersissors = 'You win! Rock beats Sissors.';
-                    console.log(playerrock_computersissors);
-                    return playerrock_computersissors;
-    
-                } else if (player == 3 && computer == 2) {
-                    let playersissors_computerpaper = 'You win! Sissors beat paper.';
-                    console.log(playersissors_computerpaper);
-                    return playersissors_computerpaper;
-    
-                } else if (player == 2 && computer == 1) {
-                    let playerpaper_computerrock = 'You win! Paper beats rock.';
-                    console.log(playerpaper_computerrock);
-                    return playerpaper_computerrock;
-    
-                } else if (player == computer) {
-                    let tie_prompt = "Woah! It's a tie!";
-                    console.log(tie_prompt);
-                    return tie_prompt;
-    
-                } else {
-                    let computer_default_prompt = 'Computer won by default.';
-                    console.log(computer_default_prompt);
-                    return computer_default_prompt;
-                }
-    
-                
-    
-            }
-            
-            function RoShamBo() {
-                
-                for (i = 0; i < 5; i++) {
-                    while (i < 5) {
-                        let player_score;
-                        let computer_score;
-                        let announcement_round = RockPaperSissorsRound(GetPlayerChoice(), GetComputerChoice());
-                        if (announcement_round[5] === 'l' || 'u') {
-                            let computer_new_score = computer_score + 1;
-                            return computer_new_score;
-                    }   else if (announcement_round[5] === 'w') {
-                            let player_new_score = player_score + 1;
-                            return player_new_score;
-                    }   else {
-                            return;
-                    }
-                    console.log(player_new_score);
-    
-                    let score_board = 'The score is ' + player_new_score + ' to ' + computer_new_score + '!';
-                    return console.log(score_board);
-                    }
-                }
-    
-                
-                    
-                
-            }
-           
-            
-            
-            
-            
-            
-            
-            RoShamBo();
-    
-    
-        </script>
-    
+
+       
 
 
 
