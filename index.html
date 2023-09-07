@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RockPaperSissorsExercise</title>
+    <title>RockPaperScissorsExercise</title>
     <link rel="stylesheet" href="style.css"/>
     <style>
         img {
@@ -56,7 +56,7 @@
           /*  border: 10px solid blue; */
 
         }
-        .rock_text{
+        .rock_button{
            /* border: 5px solid brown; */
             text-align: center;
             font-family: Impact, fantasy;
@@ -76,7 +76,7 @@
 
         }
 
-        .paper_text{
+        .paper_button{
            /* border: 5px solid brown; */
             text-align: center;
             font-family: Impact, fantasy;
@@ -85,7 +85,7 @@
         }
 
 
-        .sissors_div{
+        .scissors_div{
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -93,13 +93,13 @@
 
         }
 
-        .sissorsimage{
+        .scissorsimage{
            /* border: 10px solid blue; */
 
 
         }
 
-        .sissors_text{
+        .scissors_button{
            /* border: 5px solid brown; */
             text-align: center;
             font-family: Impact, fantasy;
@@ -153,26 +153,291 @@
             <!-- the three choices-->
             <div class="rock_div"> 
                 <img src="rockiscooking.jpeg" class="rockimage" alt="a picture of a rock named Dwayne.">
-                <p class="rock_text">Rock!</p>
+                <button class="rock_button">Rock!</button>
             </div>
+            <audio class="rockaudio" src="sxdad.mp3"></audio>
             <div class="paper_div">
                 <img src="paperpicture.jpeg" class="paperimage" alt="a bill of currency with a intergalactic hero at the face.">
-                <p class="paper_text">Paper!</p>
+                <button class="paper_button">Paper!</button>
             </div>
-            <div class="sissors_div">
-                <img src="crabclawsissors.jpeg" class="sissorsimage" alt="picture of sissors you can hold in your hand or use as a hand">
-                <p class="sissors_text">Sissors!</p>
+            <audio class="paperaudio" src="mp3cutter_m.mp3"></audio>
+            <div class="scissors_div">
+                <img src="crabclawsissors.jpeg" class="scissorsimage" alt="picture of scissors you can hold in your hand or use as a hand">
+                <button class="scissors_button">Scissors!</button>
             </div>
+            <audio class="scissorsaudio" src="katana-schwing.mp3"></audio>
         </div>
         
         <!-- box for the scoreboard, and display of who is winning-->
         <div class="scoreboard_container">
             <p class="choice_text">What's it going to be?</p>
-            <p class="scoreboard_text">The score is:</p>
+            <p class="scoreboard_text">The current score is... You: 0 and Me: 0</p>
 
 
         </div>
 
+        <script>
+            player_score = 0;
+            computer_score = 0;
+            /*Loading page event listener, start the game
+            window.addEventListener("load", );*/
+
+
+
+
+
+           /* Element and item selectors */
+            const rbutton = document.querySelector('.rock_button');
+            const pbutton = document.querySelector('.paper_button');
+            const sbutton = document.querySelector('.scissors_button');
+            const choiceprompt = document.querySelector('.choice_text');
+            const rimage = document.querySelector('.rockimage');
+            const pimage = document.querySelector('.paperimage');
+            const simage = document.querySelector('.scissorsimage');
+            const raudio = document.querySelector('.rockaudio');
+            const paudio = document.querySelector('.paperaudio');
+            const saudio = document.querySelector('.scissorsaudio');
+            const scoreboard = document.querySelector('.scoreboard_text');
+            
+            
+            /* Audio event listeners */
+            rimage.addEventListener('mouseover', playraudio);
+            rimage.addEventListener('mouseout', stopraudio);
+            pimage.addEventListener('mouseover', playpaudio);
+            pimage.addEventListener('mouseout', stoppaudio);
+            simage.addEventListener('mouseover', playsaudio);
+            simage.addEventListener('mouseout', stopsaudio);
+
+            
+            /* Player choice click functions, and play round */
+            function playerchoserock() {
+                console.log("Player chose rock!");
+                let player_choice = 0;
+                RockPaperScissorsRound(player_choice, computerDecision());
+
+            };
+            function playerchosepaper() {
+                console.log("Player chose paper!");
+                let player_choice = 1;
+                RockPaperScissorsRound(player_choice, computerDecision());
+
+            };
+            function playerchosescissors() {
+                console.log("Player chose scissors!");
+                let player_choice = 2;
+                RockPaperScissorsRound(player_choice, computerDecision());
+
+            };
+
+
+
+            
+            
+            /* Button player choice event listeners */
+            rbutton.addEventListener('click', playerchoserock);
+            sbutton.addEventListener('click', playerchosescissors);
+            pbutton.addEventListener('click', playerchosepaper);
+
+            
+            /* Image audio functions */
+            function playraudio() {
+                if(raudio.paused){
+                    raudio.play();
+                };
+            };
+            function stopraudio() {
+                raudio.pause();
+                raudio.currentTime = 0;
+            };
+            function playpaudio() {
+                if(paudio.paused){
+                    paudio.play();
+                };
+            };
+            function stoppaudio() {
+                paudio.pause();
+                paudio.currentTime = 0;
+            };
+            function playsaudio() {
+                saudio.play();
+            };
+            function stopsaudio() {
+                saudio.pause();
+                saudio.currentTime = 0;
+            };
+
+
+            /* Scoreboard updating and displaying functions */
+            function updateScoreBoard() {
+                if(computer_score == 5){
+                    scoreboard.textContent = "Maybe iSpy is more your speed... you lost the game!";
+                    rematcher();
+                    
+                }else if(player_score == 5){
+                    scoreboard.textContent = "Alright, I blame the programmer. I demand a rematch right now...";
+                    rematcher();
+                }else{
+                    scoreboard.textContent = "The current score is... You: "+player_score+" and Me: "+computer_score;
+                };
+                
+            };
+
+            
+            /*Rematch Button event listener */
+            function rematcher() {
+                const rematchbutton = document.createElement("button");
+                rematchbutton.textContent = "Rematch?";
+                scoreboard.appendChild(rematchbutton);
+                
+            };
+
+
+
+
+
+
+
+            /* Prompt functions for choice wins/loses/draws */
+            function rockchoicewin() {
+                choiceprompt.textContent = "So you've chosen the rock... and won. Excellent.";
+            };
+            function rockchoicelose() {
+                choiceprompt.textContent = "Your rock will not save you... you lose. Terrible.";
+            };
+            function rockchoicedraw() {
+                choiceprompt.textContent = "Nice rock, you see mine yet? We'll call it a draw. Lucky.";
+            };
+            function paperchoicewin() {
+                choiceprompt.textContent = "The paper is your savior... you win. Very good.";
+            };
+            function paperchoicelose() {
+                choiceprompt.textContent = "Paper to a scissors fight? You lose. Nice one.";
+            };
+            function paperchoicedraw(){
+                choiceprompt.textContent = "I guess it's a paper airplane fight now. Sweet.";
+            };
+            function scissorschoicewin() {
+                choiceprompt.textContent = "Through handcramps and all... you've won. Surprising.";
+            };
+            function scissorschoicelose() {
+                choiceprompt.textContent = "Did you make those scissors? You lose. They suck.";
+            };
+            function scissorschoicedraw() {
+                choiceprompt.textContent = "Is it getting hot in here... just me? Steamy.";
+            };
+
+
+
+
+
+            /* Beginning of game logic functions */
+            function getRandomNumber() {
+                let result = Math.floor(Math.random() * 3);
+                return result;
+            };
+
+            function computerDecision() {
+                let random_number = getRandomNumber();
+                if(random_number == 0) {
+                    console.log('Computer chose Rock!');
+                    let result1 = 'Rock';
+                    let result_return0 = 0;
+                    return result_return0;
+        
+                }else if(random_number == 1) {
+                    console.log('Computer chose Paper!');
+                    let result2 = 'Paper';
+                    let result_return1 = 1;
+                    return result_return1;
+
+                }else {
+                    console.log('Computer chose Scissors!');
+                    let result3 = 'Sissors';
+                    let result_return2 = 2;
+                    return result_return2;
+                };
+
+            };
+            
+            function RockPaperScissorsRound (player, computer) {
+                if (player == 0 && computer == 1) {
+                    console.log("Computer wins the round! Player chose rock, computer chose paper.");
+                    computer_score += 1;
+                    rockchoicelose();
+                    updateScoreBoard();
+                    
+
+                }else if (player == 1 && computer == 2) {
+                    console.log("Computer wins the round! Player chose paper, computer chose scissors.");
+                    computer_score += 1;
+                    paperchoicelose();
+                    updateScoreBoard();
+                    
+
+                }else if (player == 2 && computer == 0) {
+                    console.log("Computer wins the round! Player chose scissors, compute chose rock.");
+                    computer_score += 1;
+                    scissorschoicelose();
+                    updateScoreBoard();
+                    
+
+                }else if (player == 0 && computer == 2) {
+                    console.log("Player wins the round! Player chose rock, computer chose scissors.");
+                    player_score += 1;
+                    rockchoicewin();
+                    updateScoreBoard();
+
+
+                }else if (player == 2 && computer == 1) {
+                    console.log("Player wins the round! Player chose scissors, computer chose paper.");
+                    player_score += 1;
+                    scissorschoicewin();
+                    updateScoreBoard();
+                    
+
+                }else if (player == 1 && computer == 0) {
+                    console.log("Player wins the round! Player chose paper, computer chose rock.");
+                    player_score += 1;
+                    paperchoicewin();
+                    updateScoreBoard();
+                    
+
+                }else if (player == 0 && computer == 0) {
+                    console.log("It's a rock tie!");
+                    rockchoicedraw();
+
+
+                }else if(player == 1 && computer == 1) {
+                    console.log("It's a paper tie!")
+                    paperchoicedraw();
+                    
+
+                }else if(player == 2 && computer == 2) {
+                    console.log("It's a scissors tie!");
+                    scissorschoicedraw();
+                    
+                };
+
+            };
+
+            function restartGame() {
+                scoreboard.textContent = "The current score is... You: 0 and Me: 0";
+
+            };
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
 
        
 
